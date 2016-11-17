@@ -78,6 +78,7 @@ public class FallingCube : MonoBehaviour {
 
 	}
 	void OnTriggerEnter(Collider other){
+
 		if (other.CompareTag("Facet")){
 			
 				player.BroadcastMessage ("finishRotating");
@@ -90,24 +91,26 @@ public class FallingCube : MonoBehaviour {
 				transform.localPosition.Set (0f, 0f, 0f);
 
 				Destroy (shadowInstance);
-				FindObjectOfType<PieceController> ().NewPiece ();
+				FindObjectOfType<PieceController> ().PieceHasLanded ();
 
 
 			if (other.GetComponent<Facet> ().isOccupied == true) {
 				Destroy (other.GetComponent<Facet> ().Occupier);
-			} 
+				FindObjectOfType<ScoreKeeper> ().ChangeScoreBy (-1);
+			} else {
+				FindObjectOfType<ScoreKeeper> ().ChangeScoreBy (1);
+			}
+
 			other.GetComponent<Facet> ().Occupier = gameObject;
 			other.GetComponent<Facet> ().CheckFace ();
 		}
 	}
 
-	void OnCollisionEnter(Collision collision){
-		Debug.Log (collision.collider.tag);
-	}
+
 
 	void PlayExplosion(){
 		Destroy (shadowInstance);
 		Destroy (gameObject);
-		FindObjectOfType<PieceController> ().NewPiece ();
+		FindObjectOfType<PieceController> ().PieceHasLanded ();
 	}
 }
