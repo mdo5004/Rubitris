@@ -8,6 +8,7 @@ public class ShadowScript : MonoBehaviour {
 	void Start () {
 		rend = GetComponent<Renderer> ();
 		lifeTime = 0;
+
 	}
 	
 	void FixedUpdate () {

@@ -33,8 +33,8 @@ public class FallingCube : MonoBehaviour {
 
 		float newXdelta, newZdelta;
 		newXdelta = playingSurfaceScale.x / n - transform.FindChild ("DisplayObject").transform.localScale.x;
-		newZdelta = playingSurfaceScale.z / n - transform.FindChild ("DisplayObject").transform.localScale.z;
-		transform.FindChild("DisplayObject").transform.localScale += new Vector3(newXdelta , 0f, newZdelta);
+		newZdelta = playingSurfaceScale.y / n - transform.FindChild ("DisplayObject").transform.localScale.y;
+		transform.FindChild("DisplayObject").transform.localScale += new Vector3(newXdelta , newZdelta,  0f);
 		GetComponent<BoxCollider> ().size = new Vector3 (playingSurfaceScale.x / n, 0.2f, playingSurfaceScale.z / n);
 		shadowInstance = (GameObject)Instantiate (shadow, rayHit.point, Quaternion.identity * transform.rotation);
 
@@ -95,8 +95,14 @@ public class FallingCube : MonoBehaviour {
 
 
 			if (other.GetComponent<Facet> ().isOccupied == true) {
+				if (other.GetComponent<Facet> ().isOccupiedBy != tag) {
+					FindObjectOfType<ScoreKeeper> ().ChangeScoreBy (-1);
+					Debug.Log ("Replaced by a different color");
+				} else {
+					Debug.Log ("Replaced by the same color");
+				}
+
 				Destroy (other.GetComponent<Facet> ().Occupier);
-				FindObjectOfType<ScoreKeeper> ().ChangeScoreBy (-1);
 			} else {
 				FindObjectOfType<ScoreKeeper> ().ChangeScoreBy (1);
 			}

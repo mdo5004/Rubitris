@@ -20,7 +20,7 @@ public class PopulateLocations : MonoBehaviour
 		// for the x faces
 		for (int j = 1; j <= sqrtPointsPerFace; j++) {
 			for (int k = 1; k <= sqrtPointsPerFace; k++) {
-				Vector3 loc = new Vector3 (extents.x + 0.11f, -extents.y + (2 * j - 1) * extents.y / sqrtPointsPerFace, -extents.z + (2 * k - 1) * extents.z / sqrtPointsPerFace);
+				Vector3 loc = new Vector3 (extents.x , -extents.y + (2 * j - 1) * extents.y / sqrtPointsPerFace, -extents.z + (2 * k - 1) * extents.z / sqrtPointsPerFace);
 				facetInstance = (GameObject)Instantiate (facet, loc, Quaternion.identity);
 				facetInstance.name = faceNames[0] + j + k;
 				facetInstance.transform.RotateAround (facetInstance.transform.position, Vector3.forward, 270f);
@@ -37,7 +37,7 @@ public class PopulateLocations : MonoBehaviour
 		// for the y faces
 		for (int i = 1; i <= sqrtPointsPerFace; i++) {
 			for (int k = 1; k <= sqrtPointsPerFace; k++) {
-				Vector3 loc = new Vector3 (-extents.x + (2 * i - 1) * extents.x / sqrtPointsPerFace, extents.y + 0.11f, -extents.z + (2 * k - 1) * extents.z / sqrtPointsPerFace);
+				Vector3 loc = new Vector3 (-extents.x + (2 * i - 1) * extents.x / sqrtPointsPerFace, extents.y , -extents.z + (2 * k - 1) * extents.z / sqrtPointsPerFace);
 				facetInstance = (GameObject)Instantiate (facet, loc, Quaternion.identity);
 				facetInstance.name = faceNames[2] + i + k;
 
@@ -55,7 +55,7 @@ public class PopulateLocations : MonoBehaviour
 		// for the z faces
 		for (int i = 1; i <= sqrtPointsPerFace; i++) {
 			for (int j = 1; j <= sqrtPointsPerFace; j++) {
-				Vector3 loc = new Vector3 (-extents.x + (2 * i - 1) * extents.x / sqrtPointsPerFace, -extents.y + (2 * j - 1) * extents.y / sqrtPointsPerFace, extents.z + 0.11f);
+				Vector3 loc = new Vector3 (-extents.x + (2 * i - 1) * extents.x / sqrtPointsPerFace, -extents.y + (2 * j - 1) * extents.y / sqrtPointsPerFace, extents.z );
 				facetInstance = (GameObject)Instantiate (facet, loc, Quaternion.identity);
 				facetInstance.name = faceNames[4] + i + j;
 
