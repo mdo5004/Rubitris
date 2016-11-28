@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof(BoxCollider))]
+[RequireComponent (typeof(Rigidbody))]
+
 public class FallingCube : MonoBehaviour {
 	
 	RaycastHit rayHit;
@@ -114,9 +117,5 @@ public class FallingCube : MonoBehaviour {
 
 
 
-	void PlayExplosion(){
-		Destroy (shadowInstance);
-		Destroy (gameObject);
-		FindObjectOfType<PieceController> ().PieceHasLanded ();
-	}
+
 }

@@ -2,20 +2,27 @@
 using System.Collections;
 
 public class ShadowScript : MonoBehaviour {
-	Renderer rend;
-	float lifeTime;
+	Material shadowMaterial;
+	float t;
 	// Use this for initialization
 	void Start () {
-		rend = GetComponent<Renderer> ();
-		lifeTime = 0;
-
+		t = 0f;
+		Renderer rend = GetComponentInChildren<Renderer> ();
+		Material[] mats;
+		mats = rend.materials;
+		foreach (Material material in mats) {
+			if(material.name.Contains("Shadow")){
+				shadowMaterial = material;
+			}
+		}
 	}
 	
 	void FixedUpdate () {
-		Color color = rend.material.color;
-		color.a = (Mathf.Sin (3*lifeTime) + 2)/4;
-		rend.material.color = color;
-		lifeTime += Time.deltaTime;
+		t += Time.deltaTime;
+		float alpha = Mathf.Abs (Mathf.Sin (2f*t)) + 0.1f;
+		Color c = shadowMaterial.color;
+		c.a = alpha;
+		shadowMaterial.color = c;
 	}
 
 }
